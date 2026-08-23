@@ -41,3 +41,29 @@ DB_PATH = os.environ.get("JOB_AGENT_DB_PATH", "seen_jobs.db")
 # Comma-separated source names to run this invocation ("all" = every source).
 # Lets the scheduler run free sources hourly but quota-limited ones daily.
 SOURCES = os.environ.get("SOURCES", "all")
+
+# --- Events channel (falls back to the jobs webhook if unset) ---
+DISCORD_EVENTS_WEBHOOK_URL = (
+    os.environ.get("DISCORD_EVENTS_WEBHOOK_URL", "") or DISCORD_WEBHOOK_URL
+)
+
+# --- Greenhouse public job boards (free, no API key, no quota) ---
+# Every slug below was verified live against
+# https://boards-api.greenhouse.io/v1/boards/{slug}/jobs — unverified guesses
+# 404, so only add a slug after confirming it returns JSON.
+GREENHOUSE_COMPANIES = [
+    "stripe",
+    "intercom",
+    "datadog",
+    "cloudflare",
+    "udemy",
+    "flipdish",
+]
+
+# --- Cybersecurity event / conference RSS feeds (free) ---
+# cyberireland.ie tags real events with an "Events" category; the rest of that
+# feed is blog content, so filters.event_ok leans on the category.
+EVENT_FEEDS = [
+    ("Cyber Ireland", "https://cyberireland.ie/feed/"),
+    ("InfoSec Conferences", "https://infosec-conferences.com/feed/"),
+]

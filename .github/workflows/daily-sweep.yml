@@ -27,6 +27,7 @@ jobs:
         env:
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_EVENTS_WEBHOOK_URL: ${{ secrets.DISCORD_EVENTS_WEBHOOK_URL }}
         run: python main.py
 
       - name: Persist dedup database
